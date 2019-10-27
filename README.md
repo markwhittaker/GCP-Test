@@ -30,18 +30,26 @@ You can append `--namespace test` onto the kubectl command if you don't have/wis
 # kubens test
 ```
 
-### Setup Jenkins
-Let's deploy Jenkins using kubectl:
+
+### Setup Application
+
+For simplicity I used the mysql manifests from https://kubernetes.io/docs/tasks/run-application/run-single-instance-stateful-application/ that I've modified to add secrets
+In a production environment you would want to carefully store the secrets, not in this repo as I have done (purely for demonstration purposes).
+
+Let's deploy the webserver using kubectl:
 ```
-# kubectl create deployment jenkins --image=jenkins/jenkins:latest
+# kubectl create deployment webserver --image=apache-php7:latest
+Create the secret:
+# kubectl apply -f secrets/mysqlpass.yml
+Create the PersistentVolume:
+# kubectl apply -f manifests/mysql-pv.yml
+# kubectl apply -f manifests/mysql-deployment.yml
 # kubectl get pods
 # kubectl exec -it [pod_name] bash
-Once inside the container:
- # cat /var/jenkins_home/secrets/initialAdminPassword
- # exit
+
 ```
-You should now have the initialAdminPassword for Jenkins UI.
-First we need to expose Jenkins so you can access it. I looked into how GCP handled security but came up short on an all-in-one command to restrict the source to your public ip (/32). I came up with a method using the gcloud command:
+
+
 ```
 # kubectl expose deployment jenkins --type=LoadBalancer --port 80 --target-port 8080
 # gcloud compute firewall-rules list
@@ -49,5 +57,5 @@ Find the newly created rule and using the name
 # gcloud compute firewall-rules update [k8s-fw-rulename] --source-ranges=[mypublicip]/32
 ```
 
-Now you (and you alone) should be able to visit the Jenkins instance.
+Now you (and you alone) should be able to visit the website instance.
 Visit the website and enter the password to unlock Jenkins.
