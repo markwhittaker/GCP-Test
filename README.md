@@ -38,9 +38,7 @@ In a production environment you would want to carefully store the secrets, not i
 Let's deploy the webserver using kubectl:
 ```
 Create the secret:
-# kubectl apply -f secrets/mysqlpass.yml
-# kubectl apply -f manifests/mysql-deployment.yml
-# kubectl apply -f manifests/wordpress-deployment.yml
+# kubectl apply -k manifests/
 # kubectl get pods
 wait for them all to be available
 # gcloud compute firewall-rules list
@@ -48,4 +46,4 @@ Find the newly created rule and using the name
 # gcloud compute firewall-rules update [k8s-fw-rulename] --source-ranges=[mypublicip]/32
 ```
 
-Now you (and you alone) should be able to visit the website instance.
+Now you (and you alone) should be able to visit the website instance using the external IP provisioned on port 80.
