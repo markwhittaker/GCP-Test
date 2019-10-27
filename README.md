@@ -30,7 +30,6 @@ You can append `--namespace test` onto the kubectl command if you don't have/wis
 # kubens test
 ```
 
-
 ### Setup Application
 
 For simplicity I used the mysql manifests from https://kubernetes.io/docs/tasks/run-application/run-single-instance-stateful-application/ that I've modified to add secrets
@@ -38,12 +37,10 @@ In a production environment you would want to carefully store the secrets, not i
 
 Let's deploy the webserver using kubectl:
 ```
-# kubectl create deployment webserver --image=apache-php7:latest
 Create the secret:
 # kubectl apply -f secrets/mysqlpass.yml
-Create the PersistentVolume:
-# kubectl apply -f manifests/mysql-pv.yml
 # kubectl apply -f manifests/mysql-deployment.yml
+# kubectl apply -f manifests/wordpress-deployment.yml
 # kubectl get pods
 # kubectl exec -it [pod_name] bash
 
