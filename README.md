@@ -42,17 +42,10 @@ Create the secret:
 # kubectl apply -f manifests/mysql-deployment.yml
 # kubectl apply -f manifests/wordpress-deployment.yml
 # kubectl get pods
-# kubectl exec -it [pod_name] bash
-
-```
-
-
-```
-# kubectl expose deployment jenkins --type=LoadBalancer --port 80 --target-port 8080
+wait for them all to be available
 # gcloud compute firewall-rules list
 Find the newly created rule and using the name
 # gcloud compute firewall-rules update [k8s-fw-rulename] --source-ranges=[mypublicip]/32
 ```
 
 Now you (and you alone) should be able to visit the website instance.
-Visit the website and enter the password to unlock Jenkins.
