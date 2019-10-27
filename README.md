@@ -32,12 +32,11 @@ You can append `--namespace test` onto the kubectl command if you don't have/wis
 
 ### Setup Application
 
-For simplicity I used the mysql manifests from https://kubernetes.io/docs/tasks/run-application/run-single-instance-stateful-application/ that I've modified to add secrets
+For simplicity I used the mysql and wordpress manifests from https://kubernetes.io/docs/tutorials/stateful-application/mysql-wordpress-persistent-volume/
 In a production environment you would want to carefully store the secrets, not in this repo as I have done (purely for demonstration purposes).
 
-Let's deploy the webserver using kubectl:
+Let's deploy the wordpress instance using kubectl:
 ```
-Create the secret:
 # kubectl apply -k manifests/
 # kubectl get pods
 wait for them all to be available
