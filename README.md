@@ -33,7 +33,7 @@ You can append `--namespace test` onto the kubectl command if you don't have/wis
 ### Setup Jenkins
 Let's deploy Jenkins using kubectl:
 ```
-# kubectl create deployment jenkins --image=jenkins:latest
+# kubectl create deployment jenkins --image=jenkins/jenkins:latest
 # kubectl get pods
 # kubectl exec -it [pod_name] bash
 Once inside the container:
@@ -50,3 +50,4 @@ Find the newly created rule and using the name
 ```
 
 Now you (and you alone) should be able to visit the Jenkins instance.
+Visit the website and enter the password to unlock Jenkins.
